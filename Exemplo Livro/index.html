@@ -1,0 +1,61 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Angular teste V0.1</title>
+
+	<!-- CSS -->
+	<!-- Puxando o stylesheet da interwebs -->
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+	<style>
+		body {padding-top: 50px;}
+	</style>
+
+	<!-- JS -->
+	<!-- linkando o angular -->
+	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+	<!-- Endereço do controlador -->
+	<script src="./js/app.js"></script> 
+</head>
+<!-- o ng-app busca qual módulo o html deve se linkar -->
+<!-- o ng-controller indica qual controller irá agir no html -->
+<body class="container" ng-app="appTeste" ng-controller="mainController as main">
+	<div class="jumbotron">
+		<div class="form-group">
+			<label>Message</label>
+			<!-- ng-model linka o input à uma variável no controller -->
+			<input type="text" class="form-control" ng-model="main.message">
+		</div>
+	<!-- display the message -->
+		<h2>This is my message:</h2>
+		{{ main.message }}
+	</div>
+
+	<!-- display the list using ng-repeat -->
+	<h2>This is my list:</h2>
+	<table class="table table-bordered">
+		<thead>
+			<tr>
+				<td>Name</td>
+				<td>Color</td>
+				<td>Nerd Level</td>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="computer in main.computers">
+				<td>{{ computer.name }}</td>
+				<td>{{ computer.color }}</td>
+				<td>{{ computer.nerdness }}</td>
+			</tr>
+	</tbody>
+	</table>
+
+	<!-- form to add computer to the list -->
+	<!-- ng-submit é a ação a ser tomada quando der submit no form -->
+	<form class="form-inline" ng-submit="main.addComputer()">
+		<input type="text" class="form-control" placeholder="Macbook" ng-model="main.computerData.name">
+		<input type="text" class="form-control" placeholder="Silver" ng-model="main.computerData.color">
+		<input type="number" class="form-control" placeholder="8" ng-model="main.computerData.nerdness">
+		<button type="submit" class="btn btn-success">Add</button>
+	</form>
+</body>
+</html>
