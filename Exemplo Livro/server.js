@@ -6,11 +6,12 @@ var express = require('express'), // framework do node
 	morgan = require('morgan'),    // mandar as requests pro console
 	mongoose = require('mongoose'), // conexao com o banco
 	port = process.env.Port || 8080, // setando a porta
-	User = require('./app/models/user'); // chama a classe user
+	User = require('./app/models/user'), // chama a classe user
+	jwt = require('jsonwebtoken'), // módulo para gerar os tokens de autenticação
+	superSecret = 'baconbaconbacon'; //segredo para ser usado na geração dos tokens
 
-
-// Configurações base 
 // =================================================================
+// Configurações base 
 
 // Isso faz com que ele interprete o body das requisições HTTP POST
 app.use(bodyParser.urlencoded({extended : true}));
@@ -46,21 +47,62 @@ app.get ('/', function (req, res){
 var apiRouter = express.Router();
 
 
+// gerar o token antes da autenticação do middleware
+// link para a geração : localhost:porta/api/authenticate
+apiRouter.post('/authenticate',function(req,res,next){
+	User.findOne({ username : req.body.username})
+				.select('name username password').exec(function(err,user){
+					if (err) throw err;
+					if (!user){
+						res.json({ success : false , message : 'Usuário não encontrado.' });
+					} else if (user) {
+						var validPassword = user.comparePassword(req.body.password);
+						if (!validPassword){
+							res.json({ success : false , message : 'Senha inválida.' });
+						} else {
+							var token = jwt.sign({name : user.name, username : user.username},
+												 	superSecret, { expiresInMinutes : 1440 }); //24 horas
+							res.json({ success : true , message : 'Token gerado com sucesso.' , token : token });
+						}
+
+					}
+				});
+});
+
 // Chamar o(s) middlewar(es) antes das rotas que eles gerenciam, porque senão a requisição vai direto para a rota
 
 // middleware que vai ser executado em todas as requisições que chegar para a API
 apiRouter.use(function(req, res, next){
 	console.log('Tem nego entrando aki.') //Cria um log
-	next(); // Faz com que ele continue executando o fluxo e não pare aqui
+
+	// tenta pegar o token do corpo da requisição ou quando ele é passado por parametro no get
+	var token = req.body.token || req.param('token') || req.headers['x-access-token'];
+	if (token) {
+	// validacao do token
+
+		jwt.verify(token, superSecret, function(err, decoded){
+			if (err) {
+				return res.status(403).send({ success : false, message : 'Falha na autenticação do token.' });
+			} else {
+				req.decoded = decoded;
+				next(); // Faz com que ele continue executando o fluxo e não pare aqui
+			}
+		});
+	} else {
+		return res.status(403).send({ success : false, message : 'Não foi fornecido nenhum token.'})
+	}
+
 });
 
-
-// rota de teste, acessada via localhost:porta/api/
+// rota de teste, acessada via GET localhost:porta/api/
 apiRouter.get('/', function(req,res){
 	res.json({message: "Bem vindo à api."})
-})
+});
 
-
+// rota para retornar o usuário relacionado ao token passado na mensagem
+apiRouter.get('/me', function(req,res){
+	res.send(req.decoded);
+});
 // dentro de apiRouter.route('/x') vai gerenciar as requisições que chegam à esse endereço
 apiRouter.route('/users')
 

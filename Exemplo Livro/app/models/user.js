@@ -12,7 +12,7 @@ var UserSchema = new Schema({
 });
 
 //Schema.pre executa funções antes de fazer alguma coisa (parametros aceitos: init, validate, save, remove)
-
+ 
 // Antes de salvar, criptografa a senha
 UserSchema.pre('save',function(next){
 	var user = this;
