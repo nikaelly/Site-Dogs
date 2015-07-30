@@ -1,0 +1,12 @@
+{
+  "name": "final-api",
+  "main": "server.js",
+  "dependencies": {
+    "bcrypt-nodejs": "*",
+    "body-parser": "*",
+    "express": "*",
+    "jsonwebtoken": "*",
+    "mongoose": "^4.1.0",
+    "morgan": "*"
+  }
+}
