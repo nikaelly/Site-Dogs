@@ -1,0 +1,7 @@
+{
+	"name": "dogsApp",
+	"main": "server.js",
+	"dependencies": {
+		"express": "~4.9.1"
+	}
+}
