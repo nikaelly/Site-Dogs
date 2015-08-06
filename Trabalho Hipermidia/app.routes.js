@@ -3,6 +3,6 @@ angular.module('app.routes',['ngRoute'])
 		$routeProvider
 			// rota para a home
 			.when('/', {
-				templateUrl  : '/home2.html'
+				templateUrl  : '/home.html'
 			});
 	});

@@ -1,0 +1,15 @@
+{
+  "name": "Trabalho Hipermidia",
+  "version": "0.0.0",
+  "homepage": "https://github.com/luizaugustocs/Site-Dogs",
+  "authors": [
+    "Luiz Augusto <luizaugustocsouza@gmail.com>"
+  ],
+  "moduleType": [
+    "node"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "angular-bootstrap": "~0.13.2"
+  }
+}
