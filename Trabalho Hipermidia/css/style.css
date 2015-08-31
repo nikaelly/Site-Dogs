@@ -58,6 +58,10 @@ img {
 	max-width: 100%;
 }
 
+alinhamento{
+	text-align: justify;
+}
+
 /**  NAVIGATION  **/
 
 .homepage .navbar, .contentpage .navbar {
