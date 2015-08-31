@@ -186,10 +186,17 @@ img {
 	border-color: #e5e5e5;
 	box-shadow: 0 2px 2px rgba(50, 50, 50, .1);
 }
-
-.navbar-default .navbar-nav .open a, .navbar-default .navbar-nav .open a:hover, .navbar-default .navbar-nav .open a:focus {
+.navbar-default .navbar-nav .open a:focus,
+.navbar-default .navbar-nav .open a{
 	background: none;
 	color: #65c178;
+	height: auto;
+}
+
+.navbar-default .navbar-nav .open a:hover {
+	background: #65c178;
+	color: #FFF;
+	
 }
 
 .nav .dropdown-menu li a {
@@ -199,8 +206,10 @@ img {
 	-moz-transition: all 0.5s ease;
 }
 
-.contentpage .affix .nav .dropdown-menu .active a, .contentpage .dropdown-menu .active a:hover, .contentpage .dropdown-menu .active a:focus {
-	color: #fff;
+.contentpage .affix .nav .dropdown-menu .active a, 
+.contentpage .dropdown-menu .active a:hover, 
+.contentpage .dropdown-menu .active a:focus {
+	color: #111;
 	background-color: #65c178;
 }
 
@@ -272,12 +281,22 @@ img {
 	border: 2px solid #65c178;
 }
 
-.homepage .affix .nav li a, .contentpage .affix .nav li a:before, .contentpage .affix .nav li a, .contentpage .affix .nav li a:before {
+.homepage .affix .nav li a, 
+.contentpage .affix .nav li a:before, 
+.contentpage .affix .nav li a, 
+.contentpage .affix .nav li a:before {
 	color: #6d6d6d;
 }
 
-.homepage .affix .nav li a:hover, .contentpage.affix .nav li.active a, .contentpage .affix .nav li a:hover, .contentpage .affix .nav li.active a {
+.homepage .affix .nav li a:hover, 
+.contentpage.affix .nav li.active a, 
+ .contentpage .affix .nav li a:hover, 
+.contentpage .affix .nav li.active a {
 	color: #65c178;
+}
+.homepage .affix .nav .dropdown-menu li a:hover,
+.contentpage .affix .nav .dropdown-menu li a:hover {
+	color: #FFF;
 }
 
 
@@ -1414,6 +1433,17 @@ img {
 	color: #65c178;
 }
 
+/** LOGIN **/
+.login {
+	background: #363b3f url("../images/staff-bg.png") 0 0 no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
+	padding: 70px 0;
+	overflow: hidden;
+	min-height: 450px;
+	margin: 70px 0;
+
+}
 /** JQUERY UI  **/
 
 #tabs ul {
@@ -1756,19 +1786,25 @@ img {
 	.navbar-nav .purchase-btn {
 		display: none;
 	}
-	
+	.contentpage .affix .nav li a,
 	.homepage .affix .nav li a, .homepage .affix .nav li a:before {
 		color: #fff;
 	}
 	
 	.homepage .affix .nav li a:hover, .homepage .affix .nav li.active a {
-		color: #6d6d6d;
+		color: #FFF;
 	}
 	
-	.navbar-default .navbar-nav .open a, .navbar-default .navbar-nav .open a:hover, .navbar-default .navbar-nav .open a:focus {
-		color: #6d6d6d;
+	.navbar-default .navbar-nav .open a,
+	.navbar-default .navbar-nav .open a:focus {
+		color: #FFF;
 	}
-	
+	.navbar-default .navbar-nav .open a:hover, {
+		color: #FFF;
+	}
+	.navbar-default .navbar-nav .open .dropdown-menu a {
+		color: #FFF;
+	}
 	.adoption div a img {
 		width: 100%;
 	}
